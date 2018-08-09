@@ -54,7 +54,7 @@ resource "aws_lambda_function" "aws_pause_lambda" {
   source_code_hash  = "${data.archive_file.lambda_zip.output_base64sha256}"
   role              = "${aws_iam_role.aws_pause-role-lambdarole.arn}"
   runtime           = "python2.7"
-  handler           = "aws_pause.lambda_handler"
+  handler           = "ec2_pause.lambda_handler"
   timeout           = "60"
   publish           = true
   depends_on        = ["null_resource.buildlambdazip"]
