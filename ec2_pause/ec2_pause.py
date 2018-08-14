@@ -17,7 +17,6 @@ def lambda_handler(event, context):
     for r in regionsList:
         aws_region = r
         print("Checking Region %s" % aws_region)
-        account = event['account']
         ec = boto3.client('ec2', region_name=aws_region)
         reservations = ec.describe_instances(
             Filters=[
