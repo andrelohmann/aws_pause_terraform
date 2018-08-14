@@ -37,4 +37,4 @@ def lambda_handler(event, context):
                 instances.append(instance["InstanceId"])
 
         ec.stop_instances(InstanceIds=instances)
-        print("Stopped %i instance/s" % len(instances))
+        return("Stopped %i instance/s" % len(instances))
