@@ -21,8 +21,8 @@ def lambda_handler(event, context):
         ec = boto3.client('ec2', region_name=aws_region)
         reservations = ec.describe_instances(
             Filters=[
-                {'Name': 'tag:Ephemeral', 'Values': 'False'},
-                {'Name': 'tag:Pausable', 'Values': 'True'},
+                {'Name': 'tag:Ephemeral', 'Values': ['False']},
+                {'Name': 'tag:Pausable', 'Values': ['True']},
                 {'Name': 'instance-state-name', 'Values': [
                     'pending',
                     'running',
@@ -33,7 +33,7 @@ def lambda_handler(event, context):
             ]
         )['Reservations']
 
-        for reservation in response["Reservations"]:
+        for reservation in reservations:
             for instance in reservation["Instances"]:
                 instances.append(instance["InstanceId"])
 
