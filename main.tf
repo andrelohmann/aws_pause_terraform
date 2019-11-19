@@ -22,14 +22,14 @@ resource "aws_iam_role_policy" "aws_pause-role-lambdapolicy" {
 
 data "template_file" "vars" {
     template = "${file("${path.module}/files/vars.ini.template")}"
-    vars {
+    vars = {
       REGIONS                            = "${join(",", var.regions)}"
     }
 }
 
 
 resource "null_resource" "buildlambdazip" {
-  triggers { key = "${uuid()}" }
+  triggers = { key = "${uuid()}" }
   provisioner "local-exec" {
     command = <<EOF
     mkdir -p ${path.module}/lambda && mkdir -p ${path.module}/tmp
