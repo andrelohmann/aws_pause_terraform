@@ -15,5 +15,5 @@ variable "cron_expression" {
 }
 
 variable "regions" {
-  type = "list"
+  type = list
 }
