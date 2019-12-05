@@ -42,7 +42,7 @@ data "archive_file" "lambda_zip" {
   type        = "zip"
   source_dir  = "${path.module}/tmp"
   output_path = "${path.module}/lambda/${var.stack_prefix}-${var.unique_name}.zip"
-  depends_on  = ["null_resource.buildlambdazip"]
+  depends_on  = [null_resource.buildlambdazip]
 }
 
 # Create lambda function
@@ -57,7 +57,7 @@ resource "aws_lambda_function" "aws_pause_lambda" {
   handler           = "ec2_pause.lambda_handler"
   timeout           = "60"
   publish           = true
-  depends_on        = ["null_resource.buildlambdazip"]
+  depends_on        = [null_resource.buildlambdazip]
 }
 
 # Run the function with CloudWatch Event cronlike scheduler
